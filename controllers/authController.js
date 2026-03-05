@@ -47,12 +47,13 @@ exports.adminLogin = async (req, res) => {
       // sign jwt
       const token = jwt.sign(
         { id: admintUser.gm_id, role: "admin" },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET,
       );
       // generate cookie
       res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
+        secure: true,
         maxAge: 1000 * 60 * 60 * 2, // 120 minutes
       });
 
@@ -108,7 +109,7 @@ exports.TeacherLogin = async (req, res) => {
       // compare the enterd password with the one in the db
       const validPassword = await bcrypt.compare(
         password,
-        teacherUser.password
+        teacherUser.password,
       );
 
       // if the password is wrong
@@ -122,12 +123,13 @@ exports.TeacherLogin = async (req, res) => {
       // sign jwt
       const token = jwt.sign(
         { id: teacherUser.teacher_id, role: "teacher" },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET,
       );
       // generate cookie
       res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
+        secure: true,
         maxAge: 1000 * 60 * 60 * 2, // 120 minutes
       });
 
@@ -175,7 +177,7 @@ exports.studentLogin = async (req, res) => {
       // compare the enterd password with the one in the db
       const validPassword = await bcrypt.compare(
         password,
-        studentUser.password
+        studentUser.password,
       );
 
       // if the password is wrong
@@ -189,12 +191,13 @@ exports.studentLogin = async (req, res) => {
       // sign jwt
       const token = jwt.sign(
         { id: studentUser.student_id, role: "student" },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET,
       );
       // generate cookie
       res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
+        secure: true,
         maxAge: 1000 * 60 * 60 * 2, // 120 minutes
       });
 
@@ -250,12 +253,13 @@ exports.parentLogin = async (req, res) => {
       // sign jwt
       const token = jwt.sign(
         { id: parentUser.parent_id, role: "parent" },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET,
       );
       // generate cookie
       res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
+        secure: true,
         maxAge: 1000 * 60 * 60 * 2, // 120 minutes
       });
 
